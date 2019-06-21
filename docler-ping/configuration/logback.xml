@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration debug="false" scan="true" scanPeriod="10 seconds">
+	<contextName>DoclerPing</contextName>
+
+	<property name="COMPONENT_NAME" value="DoclerPing" />
+
+	<appender name="PING_APPENDER"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${COMPONENT_NAME}.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${COMPONENT_NAME}.%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>[DPING] %date [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%date [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<root>
+		<level value="WARN" />
+		<appender-ref ref="PING_APPENDER" />
+		<appender-ref ref="STDOUT" />
+	</root>
+
+	<logger name="hu.docler" additivity="false">
+		<appender-ref ref="PING_APPENDER" />
+		<appender-ref ref="STDOUT" />
+		<level value="WARN" />
+	</logger>
+</configuration>
